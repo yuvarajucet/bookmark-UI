@@ -22,3 +22,20 @@ export const requestMethod = Object.freeze({
     delete: 'DELETE'
 });
 
+// common method to handle all the request for API
+export function doServerRequest(endPonit,method,data){
+    $.ajax({
+        url:rootUrl.rootURL+endPonit,
+        method:method,
+        contentType:'application/json',
+        accept: 'application/json',
+        data: JSON.stringify(data),
+        success:function(responseData){
+            // do work after a usr's success process
+            console.log(responseData);
+        },
+        error:function(responseData){
+            console.log(responseData);
+        }
+    });
+}
