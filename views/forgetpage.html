@@ -6,12 +6,12 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../assets/css/style.css">
-    <script type="module" src="../assets/js/registerHandler.js"></script>
+    <script type="module" src="../assets/js/forgetHandler.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.2.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
 		integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<title>User Register</title>
+	<title>Forget Password</title>
 </head>
 
 <body>
@@ -21,46 +21,28 @@
 				<div class="register-pic js-tilt">
 					<img src="../assets/img/rocket.png" alt="IMG">
 				</div>
+
 				<div class="register-form validate-form">
 					<span class="register-form-title">
-						Register
+						Reset password
 					</span>
-					<div class="wrap-input validate-input">
-						<input class="input" type="text" name="name" placeholder="Name" id="username"
-							autocomplete="off">
-						<span class="focus-input"></span>
-						<span class="symbol-input">
-							<i class="fa fa-user" aria-hidden="true"></i>
-						</span>
-					</div>
-
+					
 					<div class="wrap-input validate-input" data-validate="Valid email is required: ex@abc.xyz">
-						<input class="input" type="email" name="email" placeholder="Email" id="email"
-							autocomplete="off">
+						<input class="input" type="email" name="email" placeholder="Email" id="email" autocomplete="off">
 						<span class="focus-input"></span>
 						<span class="symbol-input">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
 						</span>
 					</div>
 
-					<div class="wrap-input validate-input" data-validate="Password is required">
-						<input class="input" type="password" name="pass" placeholder="Create password" id="password"
-							autocomplete="off">
-						<span class="focus-input"></span>
-						<span class="symbol-input">
-							<i class="fa fa-key" aria-hidden="true"></i>
-						</span>
-					</div>
-
 					<div class="container-register-form-btn">
-						<button class="register-form-btn" id="register">
-							Register
+						<button class="register-form-btn" id="send">
+							Send
 						</button>
 					</div>
-
 					<div class="text-center p-t-136">
 						<a class="txt2" href="./login.html">
-							Already have an account Login here
+							Go to Login
 							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 						</a>
 					</div>
@@ -69,5 +51,4 @@
 		</div>
 	</div>
 </body>
-
 </html>
