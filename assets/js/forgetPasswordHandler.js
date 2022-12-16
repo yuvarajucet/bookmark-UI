@@ -1,4 +1,7 @@
-import {doServerRequest,userEndPoint,requestMethod} from './utility.js';
+import {userEndPoint,requestMethod,rootUrl} from './utility.js';
+
+var userEmail ='';
+var vToken = '';
 
 window.onload = validateToken();
 
@@ -9,6 +12,8 @@ function validateToken(){
         queryPrameters[key] = value;
     }
     if(queryPrameters.email != undefined && queryPrameters.vToken != undefined) {
+        userEmail = queryPrameters.email;
+        vToken = queryPrameters.vToken;
         addForgetPasswordArea();
     } else {
         addForgetExpireArea();
@@ -87,4 +92,34 @@ function createInputBoxWithInput(name,placeholder,id,iconclass){
     wrapper.append(boxfocus);
     wrapper.append(symble);
     return wrapper;
+}
+
+$('#send').on('click',function(e){
+    var newPassword = $('#password').val();
+    var confirmPassword = $('#confirmpassword').val();
+    var newPasswordData = {
+        "email":userEmail,
+        "vToken":vToken,
+        "newPassword":newPassword,
+        "conformPassword":confirmPassword
+    };
+    doServerRequest(userEndPoint.updatePassword,requestMethod.post,newPasswordData);
+});
+
+
+function doServerRequest(endPonit,method,data){
+    $.ajax({
+        url:rootUrl.rootURL+endPonit,
+        method:method,
+        contentType:'application/json',
+        accept: 'application/json',
+        data: JSON.stringify(data),
+        success:function(responseData){
+           $.notify(responseData.message,'Info');
+        },
+        error:function(responseData){
+            console.log(responseData);
+           $.notify(responseData.responseJSON.message,'error');
+        }
+    });
 }
