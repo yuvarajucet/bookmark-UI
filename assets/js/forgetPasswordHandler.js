@@ -52,6 +52,7 @@ function addForgetPasswordArea(){
     form.append(passwordField);
     form.append(confirmPasswordField);
     form.append(btnWrapper);
+    form.append(wrapper);
 
     imgWrapper.append(img);
     forgetWrapper.append(form);
@@ -107,6 +108,16 @@ $('#send').on('click',function(e){
 });
 
 
+function removeInputBoxFromContainer() {
+    $('.register-from').css('display','none');
+    var title = $("<span class='register-form-title'>Log in your account</span>");
+    $('.register-from').append(title);
+    var link = $("<a class='txt2' href='./login.html'>Go to Login</a>");
+    var icon = $("<i class='fa fa-long-arrow-right m-1-5' aria-hidden='true'></i>");
+    link.append(icon);
+    $('.wrap-register').append(link);
+}
+
 function doServerRequest(endPonit,method,data){
     $.ajax({
         url:rootUrl.rootURL+endPonit,
@@ -115,10 +126,10 @@ function doServerRequest(endPonit,method,data){
         accept: 'application/json',
         data: JSON.stringify(data),
         success:function(responseData){
-           $.notify(responseData.message,'Info');
+            $.notify(responseData.message,'Info');
+            removeInputBoxFromContainer();
         },
         error:function(responseData){
-            console.log(responseData);
            $.notify(responseData.responseJSON.message,'error');
         }
     });

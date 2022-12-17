@@ -20,7 +20,7 @@ function doServerRequest(endPonit,method,data){
            $.notify(responseData.message,'Info');
         },
         error:function(responseData){
-           $.notify(responseData.message,'error');
+            $.notify(responseData.responseJSON.message,'error');
         }
     });
 }

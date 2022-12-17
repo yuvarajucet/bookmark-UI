@@ -1,4 +1,4 @@
-import {userEndPoint,requestMethod} from './utility.js';
+import {userEndPoint,requestMethod,rootUrl} from './utility.js';
 
 $('#register').on('click',function(e){
     var username = $("#username").val();
