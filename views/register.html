@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="../assets/css/style.css">
 	<script src="../assets/Jquery/jquery-3.6.2.min.js"></script>
 	<script src="../assets/Jquery/notify.js"></script>
-    <script type="module" src="../assets/js/registerHandler.js"></script>
+    <script type="module" src="../assets/js/userHandler/registerHandler.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
 		integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -27,8 +27,7 @@
 						Register
 					</span>
 					<div class="wrap-input validate-input">
-						<input class="input" type="text" name="name" placeholder="Name" id="username"
-							autocomplete="off">
+						<input class="input" type="text" name="name" placeholder="Name" id="username">
 						<span class="focus-input"></span>
 						<span class="symbol-input">
 							<i class="fa fa-user" aria-hidden="true"></i>
@@ -36,8 +35,7 @@
 					</div>
 
 					<div class="wrap-input validate-input" data-validate="Valid email is required: ex@abc.xyz">
-						<input class="input" type="email" name="email" placeholder="Email" id="email"
-							autocomplete="off">
+						<input class="input" type="email" name="email" placeholder="Email" id="email">
 						<span class="focus-input"></span>
 						<span class="symbol-input">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
@@ -45,8 +43,7 @@
 					</div>
 
 					<div class="wrap-input validate-input" data-validate="Password is required">
-						<input class="input" type="password" name="pass" placeholder="Create password" id="password"
-							autocomplete="off">
+						<input class="input" type="password" name="pass" placeholder="Create password" id="password">
 						<span class="focus-input"></span>
 						<span class="symbol-input">
 							<i class="fa fa-key" aria-hidden="true"></i>
@@ -55,7 +52,10 @@
 
 					<div class="container-register-form-btn">
 						<button class="register-form-btn" id="register">
-							Register
+							<div class="registerText">
+								Register
+							</div> 
+							<div class="loader"></div>
 						</button>
 					</div>
 

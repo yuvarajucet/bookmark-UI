@@ -1,17 +1,17 @@
+import {userEndPoint,requestMethod,rootUrl,showLoader,hideLoader} from '../utility.js';
 
-import {userEndPoint,requestMethod,rootUrl} from './utility.js';
-
-$('#loginbtn').on('click',function(e) {
-    var userEmail = $('#email').val();
-    var password = $('#password').val();
+var sendText = $('.registerText');
+var loader = $('.loader');
+// send forget password link
+$('#register').on('click',function(e) {
+    showLoader(sendText,loader);
+    debugger;
+    var email = $('#email').val();
     var userData = {
-        "email":decodeURI(userEmail),
-        "password":password
+        "email":email
     };
-    doServerRequest(userEndPoint.login,requestMethod.post, userData);
+    doServerRequest(userEndPoint.sendForgetPasswordLink,requestMethod.post,userData);
 });
-
-
 
 function doServerRequest(endPonit,method,data){
     $.ajax({
@@ -22,6 +22,7 @@ function doServerRequest(endPonit,method,data){
         data: JSON.stringify(data),
         success:function(responseData){
            $.notify(responseData.message,'Info');
+           hideLoader(sendText,loader);
         },
         error:function(responseData){
             $.notify(responseData.responseJSON.message,'error');

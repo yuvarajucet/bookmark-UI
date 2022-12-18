@@ -1,6 +1,9 @@
-import {userEndPoint,requestMethod,rootUrl} from './utility.js';
+import {userEndPoint,requestMethod,rootUrl,showLoader,hideLoader} from '../utility.js';
 
+var btnText = $('.registerText');
+var loader = $('.loader');
 $('#register').on('click',function(e){
+    showLoader(btnText,loader);
     var username = $("#username").val();
     var email = $("#email").val();
     var password = $("#password").val();
@@ -13,6 +16,15 @@ $('#register').on('click',function(e){
     doServerRequest(userEndPoint.register,requestMethod.post,userData);
 });
 
+function redirectPage(responseData){
+    hideLoader(btnText,loader);
+    if(responseData.register_status.status){
+        window.location.href = '../../views/successPage.html?page=register&status='+responseData.register_status.status;
+    } else{
+        $.notify(responseData.register_status.message,'error');
+    }
+}
+
 function doServerRequest(endPonit,method,data){
     $.ajax({
         url:rootUrl.rootURL+endPonit,
@@ -21,10 +33,10 @@ function doServerRequest(endPonit,method,data){
         accept: 'application/json',
         data: JSON.stringify(data),
         success:function(responseData){
-           $.notify(responseData.register_status.message,'Info');
+            redirectPage(responseData);
         },
         error:function(responseData){
-           $.notify(responseData.message,'error');
+           $.notify(responseData.responseJSON.message,'error');
         }
     });
 }

@@ -1,4 +1,4 @@
-import { userEndPoint,requestMethod,rootUrl } from "./utility.js";
+import { userEndPoint,requestMethod,rootUrl } from "../utility.js";
 
 window.onload = validateToken()
 
@@ -22,17 +22,14 @@ function validateToken(){
 
 
 function addStatusArea(data){
-    var img = $('#img');
     var textArea = $('.msg');
     if(data.status){
         textArea.css({
             'color':'green',
             'font-size':'30px'
         });
-        img.attr('src','../img/rocket.png')
         textArea.html(data.message);
     } else{
-        img.attr('src','../img/rocket.png');
         textArea.css({
             'color':'red',
             'font-size':'30px'

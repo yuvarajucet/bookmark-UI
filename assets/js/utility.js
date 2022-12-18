@@ -20,3 +20,12 @@ export const requestMethod = Object.freeze({
     delete: 'DELETE'
 });
 
+export function showLoader(element,loader){
+    element.css('display','none');
+    loader.html("<img src='../../assets/img/book.gif' height=60px width=80px alt='loading...'/>");
+}
+
+export function hideLoader(element,loader){
+    element.css('display','block');
+    loader.css('display','none');
+}

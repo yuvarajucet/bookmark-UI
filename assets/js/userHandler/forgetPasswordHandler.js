@@ -1,4 +1,4 @@
-import {userEndPoint,requestMethod,rootUrl} from './utility.js';
+import {userEndPoint,requestMethod,rootUrl} from '../utility.js';
 
 var userEmail ='';
 var vToken = '';
@@ -67,7 +67,7 @@ function addForgetExpireArea(){
     var forgetWrapper = $("<div class='wrap-register'></div>");
     var imgWrapper = $("<div class='register-pic js-tilt'></div>");
     var img = $("<img src='../assets/img/rocket.png' alt='IMG'>");
-
+    $('i').css('display','none');
     //forget password form
     var form = $("<div class='register-from validate-form'></div>");
     var title = $("<span class='register-form-title'>Reset password</span>");
@@ -84,7 +84,7 @@ function addForgetExpireArea(){
 
 function createInputBoxWithInput(name,placeholder,id,iconclass){
     var wrapper = $("<div class='wrap-input validate-input'></div>");
-    var inputBox = $("<input class='input' type='password' name='"+name+"' placeholder='"+placeholder+"' id='"+id+"' autocomplete=off>");
+    var inputBox = $("<input class='input' type='password' name='"+name+"' placeholder='"+placeholder+"' id='"+id+"'>");
     var boxfocus = $("<span class='focus-input'></span>");
     var symble = $("<span class='symbol-input'><span>");
     var icon = $("<i class='"+iconclass+"' aria-hidden='true'></i>");
@@ -108,14 +108,12 @@ $('#send').on('click',function(e){
 });
 
 
-function removeInputBoxFromContainer() {
-    $('.register-from').css('display','none');
-    var title = $("<span class='register-form-title'>Log in your account</span>");
-    $('.register-from').append(title);
-    var link = $("<a class='txt2' href='./login.html'>Go to Login</a>");
-    var icon = $("<i class='fa fa-long-arrow-right m-1-5' aria-hidden='true'></i>");
-    link.append(icon);
-    $('.wrap-register').append(link);
+function removeInputBoxFromContainer(responseData) {
+    if(responseData.status){
+        window.location.href = 'login.html';
+    } else{
+        $.notify(responseData.message,'error');
+    }
 }
 
 function doServerRequest(endPonit,method,data){
@@ -126,8 +124,7 @@ function doServerRequest(endPonit,method,data){
         accept: 'application/json',
         data: JSON.stringify(data),
         success:function(responseData){
-            $.notify(responseData.message,'Info');
-            removeInputBoxFromContainer();
+            removeInputBoxFromContainer(responseData);
         },
         error:function(responseData){
            $.notify(responseData.responseJSON.message,'error');
