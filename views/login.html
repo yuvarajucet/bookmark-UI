@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/login.css">
-	<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script type="module" src="../assets/js/loginHandler.js"></script>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/Jquery/jquery-3.6.2.min.js"></script>
+	<script src="../assets/Jquery/jquery.cookie.min.js"></script>
+	<script src="../assets/Jquery/notify.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script type="module" src="../assets/js/userHandler/loginHandler.js"></script>
     <title>User Login</title>
 </head>
 <body>
@@ -24,7 +26,7 @@
 					</span>
 					<div id="loginform">
 						<div class="wrap-input validate-input" data-validate="Valid email is required: example@abc.xyz">
-							<input class="input" type="email" name="email" placeholder="Email" id="email" autocomplete="off">
+							<input class="input" type="email" name="email" placeholder="Email" id="email">
 							<span class="focus-input"></span>
 							<span class="symbol-input">
 								<i class="fa fa-envelope" aria-hidden="true"></i>
@@ -32,7 +34,7 @@
 						</div>
 						
 						<div class="wrap-input validate-input" data-validate="Password is required">
-							<input class="input" type="password" name="password" placeholder="Password" id="password" autocomplete="off">
+							<input class="input" type="password" name="password" placeholder="Password" id="password" >
 							<span class="focus-input"></span>
 							<span class="symbol-input">
 								<i class="fa fa-key" aria-hidden="true"></i>
@@ -41,18 +43,21 @@
 						
 						<div class="container-register-form-btn">
 							<button type="submit" class="register-form-btn" id="loginbtn">
-								Login
+								<div class="registerText">
+									Login
+								</div> 
+								<div class="loader"></div>
 							</button>
 						</div>
 						
 						<div class="text-center p-t-12">
-							<a class="txt2" href="#">
+							<a class="txt2" href="./forgetpage.html">
 								Forgot Password ?
 							</a>
 						</div>
 						
 						<div class="text-center p-t-136">
-							<a class="txt2" href="#">
+							<a class="txt2" href="./register.html">
 								Don't have account Register here
 								<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 							</a>
