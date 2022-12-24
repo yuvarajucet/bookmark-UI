@@ -12,10 +12,10 @@
     <script>
         var userid = $.cookie('userid');
         var auth = $.cookie('userAuthToken');
-        if (userid === undefined || auth === undefined){
-            window.location.href = '../views/login.html';
+        if ((userid != undefined || userid != "null") && (auth != undefined || auth != "null")){
+            window.location.href = '../views/login.html?redirect=yes';
         } else{
-            window.location.href = './views/bookmark/home.html';
+            window.location.href = './views/bookmark/index.html';
         }
     </script>
 </body>
