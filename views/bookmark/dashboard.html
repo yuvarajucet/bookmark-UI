@@ -108,6 +108,8 @@
                     </svg>
                 </button>
                 <button class="app-content-headerButton" id="add">Add</button>
+                <div class="add-popup">
+                </div>
             </div>
             <div class="app-content-actions">
                 <input class="search-bar" placeholder="Search..." type="text">
@@ -154,13 +156,26 @@
                     <div class="product-cell sales">URL</div>
                     <div class="product-cell stock">Navigate</div>
                 </div>
-
-
             </div>
         </div>
     </div>
-    <script type="module" src="../../assets/js/dashboardHandler/addbookmarklist.js"></script>
+    <!-- add bookmark popup -->
+    <div class="wrapper">
+        <div class="popup-box">
+            <h2>Add Bookmark</h2>
+            <a class="close-button popup-close" href="#">x</a>
+            <div class="form-group">
+                <div class="drop-down"></div>
+                <input type="text" name="url" placeholder="site url">
+                <input type="text" name="label" placeholder="Label">
+                <button id="insert">ADD</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../../assets/js/dashboardHandler/addbookmarklistHandler.js"></script>
     <script type="module" src="../../assets/js/dashboardHandler/listHandler.js"></script>
+    <script type="module" src="../../assets/js/dashboardHandler/addbookmarkHandler.js"></script>
 </body>
 
 </html>

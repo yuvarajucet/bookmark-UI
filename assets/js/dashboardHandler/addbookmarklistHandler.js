@@ -1,4 +1,4 @@
-import { dashboardEndPoint, requestMethod, rootUrl,validateLoginStatus} from '../utility.js';
+import { dashboardEndPoint, requestMethod, rootUrl} from '../utility.js';
 
 var userAuthenToken = null;
 
@@ -10,7 +10,6 @@ $('.account-info-more').click(function() {
     $.cookie("userAuthToken", null, { path: '/' });
     window.location.href = '../../../views/login.html?redirect=yes';
 });
-
 
 function applyfilter(filterId){
     $(".filter-menu").toggleClass("active");
@@ -122,7 +121,6 @@ function doServerRequest(userAuthenToken) {
         },
         error: function (responseData) {
             //console.log(responseData);
-            debugger;
             if(responseData.status === 403){
                 $.cookie("userid", null, { path: '/' });
                 $.cookie("userAuthToken", null, { path: '/' });
@@ -132,7 +130,7 @@ function doServerRequest(userAuthenToken) {
     });
 }
 
-function doServerRequestForCategory(userAuthenToken){
+export function doServerRequestForCategory(userAuthenToken){
     return $.ajax({
         url:rootUrl.rootURL+dashboardEndPoint.getAllCategory,
         method:requestMethod.get,
