@@ -1,7 +1,6 @@
+import {userEndPoint,requestMethod,rootUrl,validateLoginStatus} from '../utility.js';
 
-import {userEndPoint,requestMethod,rootUrl} from '../utility.js';
-
-window.onloadstart = validateExistingSession();
+window.onload = validateExistingSession();
 
 $('#loginbtn').on('click',function(e) {
     var userEmail = $('#email').val();
@@ -15,7 +14,6 @@ $('#loginbtn').on('click',function(e) {
 
 
 function redirectToDashboard(responseData){
-    debugger;
     console.log(responseData);
     $.cookie('userid',responseData.data.userid,{
         expires: 15,
@@ -27,7 +25,7 @@ function redirectToDashboard(responseData){
         path : '/',
         secure : true
     });
-    window.location.href = './bookmark/home.html';
+    window.location.href = './bookmark/dashboard.html';
 }
 
 function doServerRequest(endPonit,method,data){
@@ -52,10 +50,18 @@ function doServerRequest(endPonit,method,data){
 
 
 function validateExistingSession(){
-    var userId = $.cookie('userid');
-    var userAuthToken = $.cookie('userAuthToken');
-    console.log(userId,userAuthToken);
-    if (userId != undefined && userAuthToken != undefined){
-        window.location.href = './bookmark/home.html';
+    var searchParam = new URLSearchParams(window.location.search);
+    var queryPrameters = {};
+    for (const [key,value] of searchParam) {
+        queryPrameters[key] = value;
+    }
+    switch(queryPrameters.redirect){
+        case 'yes':
+            if (queryPrameters.expire != undefined && queryPrameters.expire){
+                $.notify(queryPrameters.msg,'error');
+            } else{
+                validateLoginStatus();   
+            }
+            break;
     }
 }
