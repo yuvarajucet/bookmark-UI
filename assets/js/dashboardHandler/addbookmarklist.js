@@ -11,6 +11,24 @@ $('.account-info-more').click(function() {
     window.location.href = '../../../views/login.html?redirect=yes';
 });
 
+
+function applyfilter(filterId){
+    $(".filter-menu").toggleClass("active");
+    var allCategory = $('.products-area-wrapper .products-row .category');
+    allCategory.each((index,element)=>{
+        var currentElementId = $(element).attr('categoryid');
+        if(filterId === 'all'){
+            if($('.products-area-wrapper.tableView').length > 0){
+                $(element).parent().css('display','flex');
+            } else if('.products-area-wrapper.gridView'){
+                $(element).parent().css('display','block');
+            }
+        } else if(currentElementId !== filterId) {
+            $(element).parent().css('display','none');
+        }
+    });
+}
+
 function validateUserLogin() {
     var userid = $.cookie('userid');
     var auth = $.cookie('userAuthToken');
@@ -28,7 +46,6 @@ function handleResponseData(respData){
         createContainerAndAppend(app_container,respData.data);
     }
 }
-
 
 function createContainerAndAppend(app_container,serverData){
     var userData = serverData.userData;
@@ -57,7 +74,6 @@ function createContainerAndAppend(app_container,serverData){
     }
 }
 
-
 export async function loadCategoryList(status){
     if(status){
         var responseData = await doServerRequestForCategory(userAuthenToken);
@@ -66,27 +82,32 @@ export async function loadCategoryList(status){
             $('.filter-menu').remove();
             var container = $("<div class='filter-menu active'></div>");
             var label = $("<label>Category</label>");
-            var select = $("<select></select>");
-            select.append($("<option value='default'>--select--</option>"));
+            var select = $("<select id='list'></select>");
+            select.append($("<option value='all'>All</option>"));
             var categoryList = responseData.data.userData;
             for(let i=0;i< categoryList.length ;i++){
                 var option = $("<option value="+categoryList[i].categoryId+">"+categoryList[i].categoryName+"</option>");
                 select.append(option);
             }
             var buttonsWrapper = $("<div class='filter-menu-buttons'></div>");
-            var resetBtn = $("<button class='filter-button reset'>reset</button>");
             var applyBtn = $("<button class='filter-button apply'>apply</button>");
             container.append(label);
             container.append(select);
             container.append(buttonsWrapper);
-            buttonsWrapper.append(resetBtn);
             buttonsWrapper.append(applyBtn);
             rootContainer.append(container);
         }
+        bindEvent();
     }
 }
 
-
+function bindEvent(){
+    $(".apply").bind({
+        click:function(){
+            applyfilter($('#list').val());
+        }
+    });
+}
 
 function doServerRequest(userAuthenToken) {
     $.ajax({
@@ -100,8 +121,13 @@ function doServerRequest(userAuthenToken) {
            handleResponseData(responseData);
         },
         error: function (responseData) {
-            console.log(responseData);
+            //console.log(responseData);
             debugger;
+            if(responseData.status === 403){
+                $.cookie("userid", null, { path: '/' });
+                $.cookie("userAuthToken", null, { path: '/' });
+                window.location.href = '../../../views/login.html?redirect=yes&expire=true&msg='+responseData.responseJSON.detail
+            }
         }
     });
 }

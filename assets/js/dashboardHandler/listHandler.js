@@ -14,6 +14,12 @@ $('.jsFilter').click(function(){
      $('.grid').addClass('active');
      $('.products-area-wrapper').addClass('gridView');
      $('.products-area-wrapper').removeClass('tableView');
+     var allCategory = $('.products-area-wrapper .products-row .category');
+     allCategory.each((index,element)=>{
+        if($(element).parent().css('display') !== 'none'){
+            $(element).parent().css('display','block');
+        }
+     });
  });
  
  //change list mode
@@ -22,6 +28,12 @@ $('.jsFilter').click(function(){
      $('.list').addClass('active');
      $('.products-area-wrapper').addClass('tableView');
      $('.products-area-wrapper').removeClass('gridView');
+     var allCategory = $('.products-area-wrapper .products-row .category');
+     allCategory.each((index,element)=>{
+        if($(element).parent().css('display') !== 'none'){
+            $(element).parent().css('display','flex');
+        }
+     });
  });
  
  //switch theme

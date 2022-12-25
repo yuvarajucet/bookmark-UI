@@ -55,7 +55,13 @@ function validateExistingSession(){
     for (const [key,value] of searchParam) {
         queryPrameters[key] = value;
     }
-    if(queryPrameters.redirect !== 'yes'){
-        validateLoginStatus();   
+    switch(queryPrameters.redirect){
+        case 'yes':
+            if (queryPrameters.expire != undefined && queryPrameters.expire){
+                $.notify(queryPrameters.msg,'error');
+            } else{
+                validateLoginStatus();   
+            }
+            break;
     }
 }
