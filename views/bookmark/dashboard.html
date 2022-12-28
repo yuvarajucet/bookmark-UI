@@ -163,12 +163,19 @@
     <div class="wrapper">
         <div class="popup-box">
             <h2>Add Bookmark</h2>
-            <a class="close-button popup-close" href="#">x</a>
+            <a class="close-button popup-close" href="javascript:void(0);">x</a>
             <div class="form-group">
-                <div class="drop-down"></div>
-                <input type="text" name="url" placeholder="site url">
-                <input type="text" name="label" placeholder="Label">
-                <button id="insert">ADD</button>
+                <div class="wrap-input">
+                    <div class="drop-down">
+                    </div>
+                </div>
+                <div class="wrap-input">
+                    <input class="input" type="text" name="label" placeholder="label" id="label">
+                </div>
+                <div class="wrap-input">
+                    <input class="input" type="url" name="url" placeholder="https://example.com" id="url">
+                </div>  
+                <button class="app-content-headerButton" id="addBookmark">Add</button>
             </div>
         </div>
     </div>

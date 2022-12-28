@@ -5,13 +5,37 @@ const userToken = $.cookie('userAuthToken');
 const userId = $.cookie('userid');
 
 
+$('#addBookmark').click(function(){
+    var label = $('#label').val();
+    var url = $('#url').val();
+    var category = $('#list').val();
+    var userData = {};
+    if(category != 'null'){
+        userData = {
+            'userId':userId,
+            'categoryId':category,
+            'label':label,
+            'url':url
+        }
+    }
+    else{
+        userData = {
+            'userId':userId,
+            'label':label,
+            'url':url
+        }
+    }
+    doServerRequestForAddBookmark(userData);
+});
 
 $('#add').click(function(){
     createAddPopUpContainer();
     $('.wrapper').fadeIn(500);
     $('.popup-box').removeClass('transform-out').addClass('transform-in');
-    //createAddPopUpContainer();
-    //showAddPopupContainer();
+});
+
+$('.close-button').click(function(){
+    $('.input').val('');
 });
 
 $('.popup-close').click(function() {
@@ -27,7 +51,7 @@ async function createAddPopUpContainer(){
     var element = $('.drop-down');
     //create category dropdown list
     var select = $("<select class='list' id='list'></select>");
-    select.append($("<option>Uncategorized</option>"));
+    select.append($("<option value='null'>Uncategorized</option>"));
     var responseData = await makeServerRequestForCategory();
     var categoryList = responseData.data.userData;
     for(let i=0;i< categoryList.length ;i++){
@@ -41,10 +65,25 @@ function makeServerRequestForCategory(){
     return doServerRequestForCategory(userToken);
 }
 
-function showAddPopupContainer(isEnable){
-    if(isEnable){
 
-    } else{
+// do server request for add bookmark
 
-    }
+function doServerRequestForAddBookmark(bookmarkData){
+    debugger;
+    $.ajax({
+        url : rootUrl.rootURL+ dashboardEndPoint.addBookmark,
+        method: requestMethod.post,
+        contentType:'application/json',
+        accept: 'application/json',
+        headers:{
+            'authorization':'Bearer '+userToken
+        },
+        data :JSON.stringify(bookmarkData),
+        success:function(responseData){
+            
+        },
+        error:function(responseData){
+          
+        }
+    });
 }
