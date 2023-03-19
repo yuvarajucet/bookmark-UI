@@ -59,7 +59,7 @@ function validateExistingSession(){
         case 'yes':
             if (queryPrameters.expire != undefined && queryPrameters.expire){
                 $.notify(queryPrameters.msg,'error');
-            } else{
+            } else if(queryPrameters.redirect !== 'yes'){
                 validateLoginStatus();   
             }
             break;

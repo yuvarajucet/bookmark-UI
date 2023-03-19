@@ -1,4 +1,4 @@
-import { dashboardEndPoint, requestMethod, rootUrl,validateLoginStatus} from '../utility.js';
+import { dashboardEndPoint, requestMethod, rootUrl} from '../utility.js';
 
 var userAuthenToken = null;
 
@@ -10,7 +10,6 @@ $('.account-info-more').click(function() {
     $.cookie("userAuthToken", null, { path: '/' });
     window.location.href = '../../../views/login.html?redirect=yes';
 });
-
 
 function applyfilter(filterId){
     $(".filter-menu").toggleClass("active");
@@ -25,6 +24,12 @@ function applyfilter(filterId){
             }
         } else if(currentElementId !== filterId) {
             $(element).parent().css('display','none');
+        } else if(currentElementId === filterId){
+            if($('.products-area-wrapper.tableView').length > 0){
+                $(element).parent().css('display','flex');
+            } else if('.products-area-wrapper.gridView'){
+                $(element).parent().css('display','block');
+            }
         }
     });
 }
@@ -47,8 +52,14 @@ function handleResponseData(respData){
     }
 }
 
-function createContainerAndAppend(app_container,serverData){
-    var userData = serverData.userData;
+export function createContainerAndAppend(app_container,serverData,from=null){
+    var userData;
+    if(from != null){
+        userData = serverData.data;
+    } else{
+        userData = serverData.userData;
+    }
+    //$('.products-row .bookmark').remove();
     for(let i=0;i<userData.length;i++){
         var categoryValue = userData[i].categoryName !== null ? userData[i].categoryName : 'un-categorized';
         var bookmarks = userData[i].bookmarks;
@@ -56,7 +67,7 @@ function createContainerAndAppend(app_container,serverData){
         if(bookmarks.length > 0){
             for(let j=0;j<bookmarks.length;j++){
                 var category = $("<div style='color:"+randomColor+"' class='product-cell category' categoryid="+userData[i].categoryId+">"+categoryValue+"</div>");
-                var product_row = $("<div class='products-row'></div>");
+                var product_row = $("<div class='products-row bookmark'></div>");
                 var imageWrapper = $("<div class='product-cell image'></div>");
                 var logo = $("<img src='data:image/png;base64,"+bookmarks[j].icon+"' alt='Site logo'>");
                 var label = $("<div class='product-cell status-cell' bookmarkid="+bookmarks[j].bookmarkId+">"+bookmarks[j].label+"</div>");
@@ -122,7 +133,6 @@ function doServerRequest(userAuthenToken) {
         },
         error: function (responseData) {
             //console.log(responseData);
-            debugger;
             if(responseData.status === 403){
                 $.cookie("userid", null, { path: '/' });
                 $.cookie("userAuthToken", null, { path: '/' });
@@ -132,7 +142,7 @@ function doServerRequest(userAuthenToken) {
     });
 }
 
-function doServerRequestForCategory(userAuthenToken){
+export function doServerRequestForCategory(userAuthenToken){
     return $.ajax({
         url:rootUrl.rootURL+dashboardEndPoint.getAllCategory,
         method:requestMethod.get,

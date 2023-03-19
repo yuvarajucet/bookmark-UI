@@ -1,4 +1,4 @@
-import {loadCategoryList} from './addbookmarklist.js';
+import {loadCategoryList} from './addbookmarklistHandler.js';
 
 //Open or close filter popup
 $('.jsFilter').click(function(){

@@ -108,6 +108,8 @@
                     </svg>
                 </button>
                 <button class="app-content-headerButton" id="add">Add</button>
+                <div class="add-popup">
+                </div>
             </div>
             <div class="app-content-actions">
                 <input class="search-bar" placeholder="Search..." type="text">
@@ -154,13 +156,44 @@
                     <div class="product-cell sales">URL</div>
                     <div class="product-cell stock">Navigate</div>
                 </div>
-
-
             </div>
         </div>
     </div>
-    <script type="module" src="../../assets/js/dashboardHandler/addbookmarklist.js"></script>
+    <!-- add bookmark popup -->
+    <div class="wrapper">
+        <div class="popup-box">
+            <h2>Add Bookmark</h2>
+            <a class="close-button popup-close" href="javascript:void(0);">x</a>
+            <div class="form-group">
+
+                <input id="chkbox" class="chkbox" type="checkbox" ><span class="txt" > Create category?</span>
+
+                <div class="wrap-input" id="catWrapper" style="display: none;">
+                    <input class="input" type="text" name="createcat" placeholder="create category" id="createcat">
+                    <div class="btn" style="padding: 10px 0 0 0;">
+                        <button class="app-content-headerButton" id="create">Create</button>
+                    </div>
+                </div>
+
+
+                <div class="wrap-input">
+                    <div class="drop-down">
+                    </div>
+                </div>
+                <div class="wrap-input">
+                    <input class="input" type="text" name="label" placeholder="label" id="label">
+                </div>
+                <div class="wrap-input">
+                    <input class="input" type="url" name="url" placeholder="https://example.com" id="url">
+                </div>  
+                <button class="app-content-headerButton" id="addBookmark">Add</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../../assets/js/dashboardHandler/addbookmarklistHandler.js"></script>
     <script type="module" src="../../assets/js/dashboardHandler/listHandler.js"></script>
+    <script type="module" src="../../assets/js/dashboardHandler/addbookmarkHandler.js"></script>
 </body>
 
 </html>
